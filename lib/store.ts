@@ -33,7 +33,7 @@ interface Store {
 }
 export const useStore = create<Store>((set)=>({
   me:null, setMe:(m)=>set({me:m}),
-  onlineIds:[], addOnline:(id)=>set(s=>({onlineIds:[...new Set([...s.onlineIds,id])]})), removeOnline:(id)=>set(s=>({onlineIds:s.onlineIds.filter(x=>x!==id)})),
+  onlineIds:[], addOnline:(id)=>set(s=>({onlineIds:Array.from(new Set([...s.onlineIds,id]))})), removeOnline:(id)=>set(s=>({onlineIds:s.onlineIds.filter(x=>x!==id)})),
   bubbles:{}, setBubble:(b)=>set(s=>({bubbles:{...s.bubbles,[b.memberId]:b}})), clearBubble:(id)=>set(s=>{const n={...s.bubbles};delete n[id];return{bubbles:n}}),
   cards:SEED_CARDS, addCard:(c)=>set(s=>({cards:[...s.cards,c]})), moveCard:(id,col)=>set(s=>({cards:s.cards.map(c=>c.id===id?{...c,column:col}:c)})),
   scores:SEED_SCORES, incScore:(id,field)=>set(s=>({scores:s.scores.map(sc=>sc.memberId===id?{...sc,[field]:sc[field]+1}:sc)})),
