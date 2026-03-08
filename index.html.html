@@ -67,12 +67,23 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .panel-title{display:flex;align-items:center;gap:8px;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.15em}
 .panel-body{flex:1;overflow-y:auto;padding:12px}
 
-/* LEADS */
-.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.mini-card{background:#141820;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.mini-card .icon{font-size:18px}
-.mini-card .val{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1}
-.mini-card .lbl{font-family:'JetBrains Mono',monospace;font-size:7px;color:rgba(255,255,255,.25);letter-spacing:.05em;text-align:center}
+/* LEADS - 3 categorii */
+.leads-cats{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.lead-cat-card{background:#141820;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:10px;cursor:pointer;transition:all .2s}
+.lead-cat-card:hover{border-color:rgba(201,168,76,.3)}
+.lead-cat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.lead-cat-name{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:rgba(255,255,255,.5)}
+.lead-cat-count{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1}
+.lead-cat-icon{font-size:18px}
+.lead-cat-add{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,.2);text-align:right;margin-top:4px}
+
+/* inline lead add form */
+.lead-add-form{background:#10131a;border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:8px;margin-top:6px;display:none}
+.lead-add-form.open{display:flex;gap:6px;align-items:center}
+.lead-add-form input{flex:1;background:#06070a;border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:5px 8px;font-size:11px;color:#fff;font-family:'Sora',sans-serif;outline:none}
+.lead-add-form input:focus{border-color:rgba(201,168,76,.4)}
+.lead-add-form button{background:#c9a84c;color:#06070a;border:none;border-radius:6px;padding:5px 8px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap}
+
 .goal-box{background:#141820;border-radius:12px;padding:10px;margin-bottom:12px;border:1px solid rgba(255,255,255,.05)}
 .goal-row{display:flex;justify-content:space-between;margin-bottom:4px}
 .goal-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.3)}
@@ -81,23 +92,28 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .progress-fill{height:100%;border-radius:3px;transition:width .5s}
 .fill-gold{background:linear-gradient(90deg,#c9a84c,#f0d080)}
 .fill-sky{background:linear-gradient(90deg,#3b82f6,#06b6d4)}
+.fill-green{background:linear-gradient(90deg,#22c55e,#4ade80)}
 .section-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.3em;margin-bottom:8px}
 .caller-card{background:#141820;border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:10px;margin-bottom:8px;transition:all .2s}
 .caller-card.is-me{border-color:rgba(201,168,76,.3)}
 .caller-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .caller-name{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8)}
 .you-badge{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(201,168,76,.6);border:1px solid rgba(201,168,76,.2);background:rgba(201,168,76,.05);padding:2px 6px;border-radius:3px}
-.caller-scores{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.score-chip{display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:8px;border:1px solid;font-family:'JetBrains Mono',monospace;font-size:10px}
+.caller-scores{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px}
+.score-chip{display:flex;flex-direction:column;align-items:center;padding:4px 6px;border-radius:8px;border:1px solid;font-family:'JetBrains Mono',monospace;font-size:9px;gap:2px}
 .score-chip.gold{color:#c9a84c;background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.2)}
 .score-chip.sky{color:#38bdf8;background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.2)}
-.score-chip .sc-val{margin-left:auto;font-weight:700}
-.caller-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
-.score-btn{font-family:'JetBrains Mono',monospace;font-size:9px;padding:5px;border-radius:8px;border:1px solid;background:transparent;cursor:pointer;transition:all .2s}
-.score-btn.sunat{color:#38bdf8;border-color:rgba(56,189,248,.3)}
-.score-btn.sunat:hover{background:rgba(56,189,248,.1)}
-.score-btn.setat{color:#c9a84c;border-color:rgba(201,168,76,.3)}
-.score-btn.setat:hover{background:rgba(201,168,76,.1)}
+.score-chip.green{color:#4ade80;background:rgba(74,222,128,.1);border-color:rgba(74,222,128,.2)}
+.score-chip .sc-val{font-family:'Bebas Neue',sans-serif;font-size:20px;line-height:1}
+.score-chip .sc-lbl{font-size:7px;opacity:.5}
+.caller-btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-top:8px}
+.score-btn{font-family:'JetBrains Mono',monospace;font-size:8px;padding:5px 2px;border-radius:8px;border:1px solid;background:transparent;cursor:pointer;transition:all .2s;text-align:center}
+.score-btn.btn-setate{color:#c9a84c;border-color:rgba(201,168,76,.3)}
+.score-btn.btn-setate:hover{background:rgba(201,168,76,.1)}
+.score-btn.btn-oferta{color:#38bdf8;border-color:rgba(56,189,248,.3)}
+.score-btn.btn-oferta:hover{background:rgba(56,189,248,.1)}
+.score-btn.btn-inchise{color:#4ade80;border-color:rgba(74,222,128,.3)}
+.score-btn.btn-inchise:hover{background:rgba(74,222,128,.1)}
 
 /* HALL */
 #hall{flex:1;position:relative;overflow:hidden;background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(201,168,76,.05) 0%,transparent 70%),linear-gradient(180deg,#06070a 0%,#0b0e18 40%,#0e1220 65%,#06070a 100%)}
@@ -109,10 +125,10 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .desk-row-1{grid-template-columns:2fr 1fr}
 .desk-row-2,.desk-row-3{grid-template-columns:1fr 1fr 1fr}
 
-/* DESK CARD */
+/* DESK CARD — drop target for tasks */
 .desk-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;border-radius:14px;border:1px solid;padding:12px 10px;cursor:pointer;transition:all .3s;overflow:hidden}
 .desk-card:hover{transform:translateY(-2px)}
-.desk-card.ceo{background:linear-gradient(135deg,#141820,#1a1e30,#141820);border-color:rgba(201,168,76,.4);animation:glowCeo 3s ease-in-out infinite}
+.desk-card.ceo{background:linear-gradient(135deg,#141820,#1a1e30,#141820);border-color:rgba(201,168,76,.4)}
 .desk-card.dev{background:#141820;border-color:rgba(6,182,212,.25)}
 .desk-card.sales{background:#141820;border-color:rgba(59,130,246,.25)}
 .desk-card.multimedia{background:#141820;border-color:rgba(139,92,246,.35)}
@@ -120,7 +136,7 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .desk-card.seo{background:#141820;border-color:rgba(34,197,94,.2)}
 .desk-card.emergency{background:#141820;border-color:rgba(224,48,48,.35)}
 .desk-card.is-me{box-shadow:0 0 0 1px rgba(201,168,76,.3)}
-@keyframes glowCeo{0%,100%{box-shadow:0 0 28px rgba(201,168,76,.15)}50%{box-shadow:0 0 56px rgba(201,168,76,.4)}}
+.desk-card.drag-over{border-color:#c9a84c!important;box-shadow:0 0 20px rgba(201,168,76,.3);transform:scale(1.04)}
 .online-indicator{position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.1);transition:all .3s}
 .online-indicator.online{background:#22c55e;box-shadow:0 0 7px #22c55e;animation:pulse 2s infinite}
 .desk-avatar{position:relative;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);transition:all .3s;flex-shrink:0}
@@ -136,6 +152,8 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .dev-monitors{display:flex;gap:4px;margin-top:2px}
 .dev-monitor{background:#06070a;border:1px solid rgba(6,182,212,.2);border-radius:3px;padding:3px}
 .dev-line{height:2px;background:rgba(6,182,212,.3);border-radius:1px;margin-bottom:2px}
+/* task count badge on desk */
+.desk-task-count{font-family:'JetBrains Mono',monospace;font-size:8px;color:#c9a84c;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);padding:1px 6px;border-radius:10px;margin-top:2px}
 
 /* BUBBLE */
 .desk-bubble{position:absolute;top:-44px;left:50%;transform:translateX(-50%);background:#fff;color:#06070a;font-size:11px;font-weight:600;padding:6px 12px;border-radius:10px 10px 10px 2px;white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis;z-index:20;animation:bubbleIn .3s cubic-bezier(.175,.885,.32,1.275) forwards;box-shadow:0 4px 20px rgba(0,0,0,.5)}
@@ -210,11 +228,11 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .btn-collect{font-family:'JetBrains Mono',monospace;font-size:8px;color:#4ade80;border:1px solid rgba(74,222,128,.3);background:rgba(74,222,128,.05);padding:3px 8px;border-radius:6px;cursor:pointer;transition:all .2s}
 .btn-collect:hover{background:rgba(74,222,128,.15)}
 
-/* KANBAN */
+/* KANBAN — REDESIGNED */
 #kanban-modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
 #kanban-modal.open{display:flex}
 .kanban-backdrop{position:absolute;inset:0;background:rgba(6,7,10,.8);backdrop-filter:blur(12px)}
-.kanban-box{position:relative;width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;background:#10131a;border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;animation:slideUp .3s cubic-bezier(.175,.885,.32,1.275)}
+.kanban-box{position:relative;width:100%;max-width:1000px;max-height:90vh;display:flex;flex-direction:column;background:#10131a;border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;animation:slideUp .3s cubic-bezier(.175,.885,.32,1.275)}
 @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .kanban-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
 .kanban-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.15em;display:flex;align-items:center;gap:10px}
@@ -229,6 +247,23 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .kanban-form input,.kanban-form select{background:#06070a;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:6px 12px;font-size:13px;color:#fff;font-family:'Sora',sans-serif;outline:none}
 .kanban-form input{flex:1;min-width:180px}
 .kanban-form input:focus,.kanban-form select:focus{border-color:rgba(201,168,76,.4)}
+
+/* Kanban layout: task list on left + 3 cols */
+.kanban-body{display:flex;flex:1;overflow:hidden;min-height:0}
+
+/* TASK LIBRARY — left sidebar */
+.task-library{width:200px;flex-shrink:0;background:#0b0d13;border-right:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;overflow:hidden}
+.task-lib-header{padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(255,255,255,.3);border-bottom:1px solid rgba(255,255,255,.05);background:#0b0d13;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.task-lib-add{font-size:14px;cursor:pointer;color:#c9a84c;background:none;border:none;padding:0;transition:opacity .2s}
+.task-lib-add:hover{opacity:.7}
+.task-lib-list{flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:6px}
+.lib-task{background:#141820;border:1px solid rgba(255,255,255,.07);border-left:3px solid #c9a84c;border-radius:8px;padding:8px 10px;cursor:grab;transition:all .2s;user-select:none}
+.lib-task:hover{border-color:rgba(255,255,255,.15);transform:translateX(2px)}
+.lib-task.dragging{opacity:.4;cursor:grabbing}
+.lib-task-title{font-size:11px;font-weight:500;color:rgba(255,255,255,.85);line-height:1.3;margin-bottom:4px}
+.lib-task-tags{display:flex;gap:4px;flex-wrap:wrap}
+
+/* Kanban 3 cols */
 .kanban-cols{flex:1;overflow:hidden;display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid rgba(255,255,255,.05)}
 .kanban-col{display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,.05)}
 .kanban-col:last-child{border-right:none}
@@ -237,9 +272,9 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .col-inprogress .kanban-col-header{color:#c9a84c}
 .col-done .kanban-col-header{color:#4ade80}
 .kanban-cards{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
-.kanban-card{background:#141820;border:1px solid rgba(255,255,255,.06);border-left:3px solid;border-radius:8px;padding:10px;cursor:grab;transition:all .2s}
+.kanban-card{background:#141820;border:1px solid rgba(255,255,255,.06);border-left:3px solid;border-radius:8px;padding:10px;cursor:grab;transition:all .2s;user-select:none}
 .kanban-card:hover{border-color:rgba(255,255,255,.12)}
-.kanban-card.dragging{opacity:.5;cursor:grabbing}
+.kanban-card.dragging{opacity:.4;cursor:grabbing}
 .kanban-card.over{border-top:2px solid #c9a84c}
 .priority-high{border-left-color:#e03030}
 .priority-medium{border-left-color:#c9a84c}
@@ -252,8 +287,18 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
 .tag-high{color:#f87171;background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.15)}
 .tag-medium{color:#fbbf24;background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.15)}
 .tag-low{color:#4ade80;background:rgba(74,222,128,.08);border-color:rgba(74,222,128,.15)}
+.card-assignee{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,.3);margin-top:4px;display:flex;align-items:center;gap:4px}
 .drop-zone{height:60px;border:2px dashed rgba(255,255,255,.07);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.1)}
 .drop-zone.active{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.03)}
+.card-delete{float:right;background:none;border:none;color:rgba(255,255,255,.2);cursor:pointer;font-size:11px;padding:0 2px;transition:color .2s;margin-left:4px}
+.card-delete:hover{color:#e03030}
+
+/* MEMBER drop zones in kanban — below cols */
+.member-drop-row{display:flex;gap:6px;padding:10px 14px;border-top:1px solid rgba(255,255,255,.05);background:#0b0d13;flex-shrink:0;flex-wrap:wrap}
+.member-drop-zone{display:flex;align-items:center;gap:6px;background:#141820;border:1px dashed rgba(255,255,255,.1);border-radius:10px;padding:6px 10px;cursor:pointer;transition:all .2s;font-size:12px}
+.member-drop-zone .mdz-name{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,.3)}
+.member-drop-zone .mdz-count{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#c9a84c;margin-left:auto}
+.member-drop-zone.drag-over-member{border-color:#c9a84c;background:rgba(201,168,76,.08);box-shadow:0 0 12px rgba(201,168,76,.2)}
 
 /* MOBILE */
 @media(max-width:768px){
@@ -275,11 +320,16 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
   .cars{display:none}
   #mobile-tabs{display:flex!important}
   #mobile-panel{display:block!important}
+  .task-library{display:none}
 }
 #mobile-tabs{display:none;position:fixed;bottom:64px;left:0;right:0;z-index:35;background:#0b0d13;border-top:1px solid rgba(255,255,255,.05);padding:6px 16px;gap:8px;overflow-x:auto}
 .mobile-tab{font-family:'JetBrains Mono',monospace;font-size:9px;padding:6px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(255,255,255,.3);cursor:pointer;white-space:nowrap;transition:all .2s}
 .mobile-tab.active{color:#c9a84c;border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.08)}
 #mobile-panel{display:none;position:fixed;bottom:112px;left:0;right:0;z-index:34;max-height:50vh;overflow-y:auto;background:#0b0d13;border-top:1px solid rgba(255,255,255,.06)}
+
+/* Notification toast */
+.toast{position:fixed;top:60px;right:16px;z-index:200;background:#141820;border:1px solid rgba(201,168,76,.4);border-radius:10px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#c9a84c;animation:toastIn .3s ease;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 </style>
 </head>
 <body>
@@ -324,8 +374,13 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
     </div>
     <div class="stat-sep"></div>
     <div class="stat-item">
-      <span class="stat-label">SUNATE</span>
-      <span class="stat-val" id="top-sunate" style="color:#38bdf8">0</span>
+      <span class="stat-label">OFERTE</span>
+      <span class="stat-val" id="top-oferta" style="color:#38bdf8">0</span>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat-item">
+      <span class="stat-label">ÎNCHISE</span>
+      <span class="stat-val" id="top-inchise" style="color:#4ade80">0</span>
     </div>
   </div>
   <div class="topbar-right">
@@ -344,20 +399,53 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
   <!-- LEADS PANEL -->
   <aside class="side-panel" id="leads-panel">
     <div class="panel-header">
-      <div class="panel-title">📈 PRODUCTIVITATE</div>
+      <div class="panel-title">📈 LEADS</div>
     </div>
     <div class="panel-body">
-      <div class="mini-grid">
-        <div class="mini-card"><div class="icon">🎯</div><div class="val" id="lp-setate" style="color:#c9a84c">0</div><div class="lbl">LEADS SETATE</div></div>
-        <div class="mini-card"><div class="icon">📞</div><div class="val" id="lp-sunate" style="color:#38bdf8">0</div><div class="lbl">LEADS SUNATE</div></div>
-        <div class="mini-card"><div class="icon">⚙️</div><div class="val" id="lp-inprogress" style="color:#f97316">0</div><div class="lbl">ÎN LUCRU</div></div>
-        <div class="mini-card"><div class="icon">✅</div><div class="val" id="lp-done" style="color:#22c55e">0</div><div class="lbl">FINALIZATE</div></div>
+      <!-- 3 categorii leads -->
+      <div class="leads-cats">
+        <div class="lead-cat-card">
+          <div class="lead-cat-top">
+            <span class="lead-cat-icon">🎯</span>
+            <span class="lead-cat-name">LEADS SETATE</span>
+          </div>
+          <div class="lead-cat-count" id="lp-setate" style="color:#c9a84c">0</div>
+          <div class="lead-cat-add" onclick="toggleLeadForm('setate')">+ adaugă lead</div>
+          <div class="lead-add-form" id="form-setate">
+            <input id="linput-setate" placeholder="Nume client..." onkeydown="if(event.key==='Enter')addLead('setate')">
+            <button onclick="addLead('setate')">✓</button>
+          </div>
+        </div>
+        <div class="lead-cat-card">
+          <div class="lead-cat-top">
+            <span class="lead-cat-icon">📨</span>
+            <span class="lead-cat-name">LEADS DE TRIMIS OFERTĂ</span>
+          </div>
+          <div class="lead-cat-count" id="lp-oferta" style="color:#38bdf8">0</div>
+          <div class="lead-cat-add" onclick="toggleLeadForm('oferta')">+ adaugă lead</div>
+          <div class="lead-add-form" id="form-oferta">
+            <input id="linput-oferta" placeholder="Nume client..." onkeydown="if(event.key==='Enter')addLead('oferta')">
+            <button onclick="addLead('oferta')">✓</button>
+          </div>
+        </div>
+        <div class="lead-cat-card">
+          <div class="lead-cat-top">
+            <span class="lead-cat-icon">✅</span>
+            <span class="lead-cat-name">LEADS ÎNCHISE</span>
+          </div>
+          <div class="lead-cat-count" id="lp-inchise" style="color:#4ade80">0</div>
+          <div class="lead-cat-add" onclick="toggleLeadForm('inchise')">+ adaugă lead</div>
+          <div class="lead-add-form" id="form-inchise">
+            <input id="linput-inchise" placeholder="Nume client..." onkeydown="if(event.key==='Enter')addLead('inchise')">
+            <button onclick="addLead('inchise')">✓</button>
+          </div>
+        </div>
       </div>
       <div class="goal-box">
-        <div class="goal-row"><span class="goal-lbl">GOAL ZILNIC</span><span class="goal-val" id="goal-daily-txt">0/10</span></div>
+        <div class="goal-row"><span class="goal-lbl">GOAL ZILNIC SETATE</span><span class="goal-val" id="goal-daily-txt">0/10</span></div>
         <div class="progress-bar"><div class="progress-fill fill-gold" id="goal-daily-bar" style="width:0%"></div></div>
-        <div class="goal-row"><span class="goal-lbl">GOAL LUNAR</span><span class="goal-val" id="goal-monthly-txt">0/50</span></div>
-        <div class="progress-bar"><div class="progress-fill fill-sky" id="goal-monthly-bar" style="width:0%"></div></div>
+        <div class="goal-row"><span class="goal-lbl">GOAL LUNAR ÎNCHISE</span><span class="goal-val" id="goal-monthly-txt">0/50</span></div>
+        <div class="progress-bar"><div class="progress-fill fill-green" id="goal-monthly-bar" style="width:0%"></div></div>
       </div>
       <div class="section-label">CALLERS</div>
       <div id="callers-list"></div>
@@ -370,18 +458,26 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
     <div class="hall-floor"></div>
     <div class="desks-container">
       <div class="desk-row desk-row-1">
-        <div class="desk-card ceo" id="desk-lucian" onclick="toggleKanban()"></div>
-        <div class="desk-card multimedia" id="desk-liviu" onclick="toggleKanban()"></div>
+        <div class="desk-card ceo" id="desk-lucian" onclick="toggleKanban()"
+          ondragover="onDeskDragOver(event,'lucian')" ondrop="onDeskDrop(event,'lucian')" ondragleave="onDeskDragLeave(event)"></div>
+        <div class="desk-card multimedia" id="desk-liviu" onclick="toggleKanban()"
+          ondragover="onDeskDragOver(event,'liviu')" ondrop="onDeskDrop(event,'liviu')" ondragleave="onDeskDragLeave(event)"></div>
       </div>
       <div class="desk-row desk-row-2">
-        <div class="desk-card sales" id="desk-catalin" onclick="toggleKanban()"></div>
-        <div class="desk-card dev" id="desk-saitama" onclick="toggleKanban()"></div>
-        <div class="desk-card setter" id="desk-beleaua" onclick="toggleKanban()"></div>
+        <div class="desk-card sales" id="desk-catalin" onclick="toggleKanban()"
+          ondragover="onDeskDragOver(event,'catalin')" ondrop="onDeskDrop(event,'catalin')" ondragleave="onDeskDragLeave(event)"></div>
+        <div class="desk-card dev" id="desk-saitama" onclick="toggleKanban()"
+          ondragover="onDeskDragOver(event,'saitama')" ondrop="onDeskDrop(event,'saitama')" ondragleave="onDeskDragLeave(event)"></div>
+        <div class="desk-card setter" id="desk-beleaua" onclick="toggleKanban()"
+          ondragover="onDeskDragOver(event,'beleaua')" ondrop="onDeskDrop(event,'beleaua')" ondragleave="onDeskDragLeave(event)"></div>
       </div>
       <div class="desk-row desk-row-3">
-        <div class="desk-card dev" id="desk-vlad" onclick="toggleKanban()"></div>
-        <div class="desk-card seo" id="desk-cosmin" onclick="toggleKanban()"></div>
-        <div class="desk-card emergency" id="desk-ioana" onclick="toggleKanban()"></div>
+        <div class="desk-card dev" id="desk-vlad" onclick="toggleKanban()"
+          ondragover="onDeskDragOver(event,'vlad')" ondrop="onDeskDrop(event,'vlad')" ondragleave="onDeskDragLeave(event)"></div>
+        <div class="desk-card seo" id="desk-cosmin" onclick="toggleKanban()"
+          ondragover="onDeskDragOver(event,'cosmin')" ondrop="onDeskDrop(event,'cosmin')" ondragleave="onDeskDragLeave(event)"></div>
+        <div class="desk-card emergency" id="desk-ioana" onclick="toggleKanban()"
+          ondragover="onDeskDragOver(event,'ioana')" ondrop="onDeskDrop(event,'ioana')" ondragleave="onDeskDragLeave(event)"></div>
       </div>
     </div>
     <div class="cars">
@@ -461,9 +557,9 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
   <div class="kanban-backdrop" onclick="toggleKanban()"></div>
   <div class="kanban-box">
     <div class="kanban-header">
-      <div class="kanban-title">TASK BOARD <span class="kanban-count" id="kanban-count">0 cards</span></div>
+      <div class="kanban-title">TASK BOARD <span class="kanban-count" id="kanban-count">0 taskuri</span></div>
       <div class="kanban-actions">
-        <button class="btn-kanban-add" id="btn-k-add" onclick="toggleKanbanForm()" style="display:none">+ ADAUGĂ</button>
+        <button class="btn-kanban-add" id="btn-k-add" onclick="toggleKanbanForm()">+ TASK NOU</button>
         <button class="btn-close" onclick="toggleKanban()">✕</button>
       </div>
     </div>
@@ -471,20 +567,46 @@ html,body{height:100%;overflow:hidden;background:#06070a;font-family:'Sora',sans
       <input id="k-title" placeholder="Titlu task / lead...">
       <select id="k-type"><option value="task">📌 Task</option><option value="lead">🎯 Lead</option></select>
       <select id="k-priority"><option value="high">🔴 High</option><option value="medium">🟡 Medium</option><option value="low">🟢 Low</option></select>
+      <select id="k-assignee">
+        <option value="">👤 Nimeni</option>
+        <option value="lucian">🏢 Lucian</option>
+        <option value="catalin">📞 Cătălin</option>
+        <option value="saitama">🖥️ Saitama</option>
+        <option value="beleaua">🎯 Beleaua</option>
+        <option value="liviu">🎥 Liviu</option>
+        <option value="vlad">💻 Vlad</option>
+        <option value="cosmin">🌐 Cosmin</option>
+        <option value="ioana">🚨 Ioana</option>
+      </select>
       <button class="btn-add" style="width:auto;padding:6px 16px" onclick="addCard()">✅ ADAUGĂ</button>
     </div>
-    <div class="kanban-cols">
-      <div class="kanban-col col-todo" id="col-todo" ondragover="onDragOver(event,'todo')" ondrop="onDrop(event,'todo')" ondragleave="onDragLeave(event)">
-        <div class="kanban-col-header">TO DO <span id="cnt-todo">0</span></div>
-        <div class="kanban-cards" id="cards-todo"></div>
+    <div class="kanban-body">
+      <!-- Task Library (left) -->
+      <div class="task-library">
+        <div class="task-lib-header">
+          TASKURI SALVATE
+          <button class="task-lib-add" onclick="addLibTask()" title="Adaugă task în bibliotecă">＋</button>
+        </div>
+        <div class="task-lib-list" id="task-lib-list"></div>
       </div>
-      <div class="kanban-col col-inprogress" id="col-inprogress" ondragover="onDragOver(event,'inProgress')" ondrop="onDrop(event,'inProgress')" ondragleave="onDragLeave(event)">
-        <div class="kanban-col-header" style="color:#c9a84c">IN PROGRESS <span id="cnt-inprogress">0</span></div>
-        <div class="kanban-cards" id="cards-inprogress"></div>
-      </div>
-      <div class="kanban-col col-done" id="col-done" ondragover="onDragOver(event,'done')" ondrop="onDrop(event,'done')" ondragleave="onDragLeave(event)">
-        <div class="kanban-col-header" style="color:#4ade80">✓ DONE <span id="cnt-done">0</span></div>
-        <div class="kanban-cards" id="cards-done"></div>
+      <!-- 3 Columns -->
+      <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+        <div class="kanban-cols">
+          <div class="kanban-col col-todo" id="col-todo" ondragover="onDragOver(event,'todo')" ondrop="onDrop(event,'todo')" ondragleave="onDragLeave(event)">
+            <div class="kanban-col-header">DE FĂCUT <span id="cnt-todo">0</span></div>
+            <div class="kanban-cards" id="cards-todo"></div>
+          </div>
+          <div class="kanban-col col-inprogress" id="col-inprogress" ondragover="onDragOver(event,'inProgress')" ondrop="onDrop(event,'inProgress')" ondragleave="onDragLeave(event)">
+            <div class="kanban-col-header">ÎN PROGRES <span id="cnt-inprogress">0</span></div>
+            <div class="kanban-cards" id="cards-inprogress"></div>
+          </div>
+          <div class="kanban-col col-done" id="col-done" ondragover="onDragOver(event,'done')" ondrop="onDrop(event,'done')" ondragleave="onDragLeave(event)">
+            <div class="kanban-col-header">✓ DONE <span id="cnt-done">0</span></div>
+            <div class="kanban-cards" id="cards-done"></div>
+          </div>
+        </div>
+        <!-- Member drop zones -->
+        <div class="member-drop-row" id="member-drop-row"></div>
       </div>
     </div>
   </div>
@@ -506,15 +628,18 @@ const MEMBERS = {
   ioana:   {name:'Ioana',   pin:'5196', emoji:'🚨', role:'emergency', title:'Emergency Setting · Video Prod.', color:'#e03030'},
 };
 
-// CALLERS = doar Catalin si Beleaua
 const CALLERS = ['catalin','beleaua'];
 
 // ===== STATE =====
 let me = null;
 let pin = '';
-let onlineUsers = {};  // {memberId: timestamp}
+let onlineUsers = {};
 let bubbles = {};
-let scores = {catalin:{setate:0,sunate:0}, beleaua:{setate:0,sunate:0}};
+// scores cu 3 categorii: setate, oferta, inchise
+let scores = {
+  catalin:{setate:0,oferta:0,inchise:0},
+  beleaua:{setate:0,oferta:0,inchise:0}
+};
 let payments = [
   {id:'p1',client:'Salon Luxe',amount:1200,date:'2026-03-10',status:'due'},
   {id:'p2',client:'Auto Service Popa',amount:850,date:'2026-03-15',status:'pending'},
@@ -522,13 +647,27 @@ let payments = [
   {id:'p4',client:'Fitness Center Nord',amount:3200,date:'2026-03-28',status:'pending'},
 ];
 let cards = [
-  {id:'c1',title:'Apel prospectare - Fitness Club Nord',type:'lead',priority:'high',column:'todo'},
-  {id:'c2',title:'SEO audit - Restaurant Bella Vista',type:'task',priority:'medium',column:'todo'},
-  {id:'c3',title:'Meniu digital QR - Pizzeria Luna',type:'task',priority:'high',column:'inProgress'},
-  {id:'c4',title:'Reels Instagram - Salon Luxe',type:'task',priority:'medium',column:'inProgress'},
-  {id:'c5',title:'Landing page - Auto Service Popa',type:'task',priority:'low',column:'done'},
+  {id:'c1',title:'Apel prospectare - Fitness Club Nord',type:'lead',priority:'high',column:'todo',assignee:''},
+  {id:'c2',title:'SEO audit - Restaurant Bella Vista',type:'task',priority:'medium',column:'todo',assignee:'cosmin'},
+  {id:'c3',title:'Meniu digital QR - Pizzeria Luna',type:'task',priority:'high',column:'inProgress',assignee:'saitama'},
+  {id:'c4',title:'Reels Instagram - Salon Luxe',type:'task',priority:'medium',column:'inProgress',assignee:'liviu'},
+  {id:'c5',title:'Landing page - Auto Service Popa',type:'task',priority:'low',column:'done',assignee:'vlad'},
 ];
+// Task library — taskuri predefinite drag-able
+let libTasks = [
+  {id:'l1',title:'Apel de prospecție client',type:'task',priority:'high'},
+  {id:'l2',title:'Audit SEO website client',type:'task',priority:'medium'},
+  {id:'l3',title:'Creare landing page',type:'task',priority:'high'},
+  {id:'l4',title:'Postare Social Media',type:'task',priority:'low'},
+  {id:'l5',title:'Trimitere ofertă client',type:'lead',priority:'medium'},
+  {id:'l6',title:'Ședință strategie',type:'task',priority:'medium'},
+  {id:'l7',title:'Reels / Video promo',type:'task',priority:'low'},
+  {id:'l8',title:'Optimizare Google Ads',type:'task',priority:'high'},
+];
+// Leads lists
+let leads = {setate:[], oferta:[], inchise:[]};
 let dragId = null;
+let dragSource = null; // 'board' or 'library'
 let showPayForm = false;
 let showKanbanForm = false;
 let heartbeatInterval = null;
@@ -538,11 +677,10 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let channel = null;
 
 function initRealtime() {
-  channel = sb.channel('office-v2', {
-    config: { broadcast: { self: false }, presence: { key: me } }
+  channel = sb.channel('office-v3', {
+    config: { broadcast: { self: true }, presence: { key: me } }
   });
 
-  // Presence - cine e online
   channel.on('presence', { event: 'sync' }, () => {
     const state = channel.presenceState();
     onlineUsers = {};
@@ -553,17 +691,20 @@ function initRealtime() {
     updateOnlineCount();
   });
 
-  // Broadcast - mesaje chat, scoruri, plati, carduri
   channel.on('broadcast', { event: 'chat' }, ({ payload }) => {
     showBubble(payload.memberId, payload.text);
   });
 
   channel.on('broadcast', { event: 'score' }, ({ payload }) => {
-    if (scores[payload.memberId]) {
-      scores[payload.memberId][payload.field] = payload.value;
-      renderCallers();
-      updateTopStats();
-    }
+    scores = payload.scores;
+    renderCallers();
+    updateTopStats();
+  });
+
+  channel.on('broadcast', { event: 'leads_update' }, ({ payload }) => {
+    leads = payload.leads;
+    renderLeads();
+    updateTopStats();
   });
 
   channel.on('broadcast', { event: 'payment_update' }, ({ payload }) => {
@@ -582,7 +723,6 @@ function initRealtime() {
     }
   });
 
-  // Heartbeat
   heartbeatInterval = setInterval(() => {
     if (channel) channel.track({ name: MEMBERS[me].name, emoji: MEMBERS[me].emoji });
   }, 30000);
@@ -627,8 +767,9 @@ function checkPin() {
     document.getElementById('chat-input').placeholder = `${MEMBERS[me].name} spune ceva...`;
     if (me === 'lucian') {
       document.getElementById('btn-add-payment').style.display = 'flex';
-      document.getElementById('btn-k-add').style.display = 'flex';
     }
+    // everyone can add tasks now
+    document.getElementById('btn-k-add').style.display = 'flex';
     initRealtime();
     renderAll();
   } else {
@@ -692,6 +833,8 @@ function renderDesks() {
     const gearColor = isMe ? 'rgba(201,168,76,.32)' : 'rgba(255,255,255,.09)';
     const avatarSize = isCeo ? 'big' : 'med';
     const bubble = bubbles[id];
+    const myTasks = cards.filter(c => c.assignee === id && c.column !== 'done');
+    const taskCountHtml = myTasks.length > 0 ? `<div class="desk-task-count">📋 ${myTasks.length} task${myTasks.length>1?'uri':''}</div>` : '';
 
     let extras = '';
     if (m.role === 'dev') {
@@ -718,8 +861,54 @@ function renderDesks() {
       <div class="desk-name">${m.name}</div>
       <div class="desk-title">${m.title}</div>
       ${extras}
+      ${taskCountHtml}
     `;
   });
+}
+
+// Drag task FROM library TO desk (on main hall)
+function onDeskDragOver(e, memberId) {
+  e.preventDefault();
+  e.stopPropagation();
+  const el = document.getElementById(`desk-${memberId}`);
+  if (el) el.classList.add('drag-over');
+}
+function onDeskDragLeave(e) {
+  document.querySelectorAll('.desk-card').forEach(el => el.classList.remove('drag-over'));
+}
+function onDeskDrop(e, memberId) {
+  e.preventDefault();
+  e.stopPropagation();
+  document.querySelectorAll('.desk-card').forEach(el => el.classList.remove('drag-over'));
+  if (!dragId) return;
+  if (dragSource === 'library') {
+    const lt = libTasks.find(t=>t.id===dragId);
+    if (lt) {
+      const newCard = {
+        id: 'k'+Date.now(),
+        title: lt.title,
+        type: lt.type,
+        priority: lt.priority,
+        column: 'todo',
+        assignee: memberId
+      };
+      cards.push(newCard);
+      renderKanban();
+      broadcast('cards_update', {cards});
+      showToast(`📋 "${lt.title}" → ${MEMBERS[memberId].name}`);
+    }
+  } else if (dragSource === 'board') {
+    const card = cards.find(c=>c.id===dragId);
+    if (card) {
+      card.assignee = memberId;
+      renderKanban();
+      renderDesks();
+      broadcast('cards_update', {cards});
+      showToast(`📋 Task atribuit lui ${MEMBERS[memberId].name}`);
+    }
+  }
+  dragId = null;
+  dragSource = null;
 }
 
 // ===== BUBBLE =====
@@ -745,8 +934,41 @@ function sendChat(emoji) {
   const text = emoji || input.value.trim();
   if (!text) return;
   input.value = '';
+  // Show locally immediately
   showBubble(me, text);
   broadcast('chat', { memberId: me, text });
+}
+
+// ===== LEADS =====
+function toggleLeadForm(cat) {
+  const form = document.getElementById(`form-${cat}`);
+  const isOpen = form.classList.contains('open');
+  // close all
+  ['setate','oferta','inchise'].forEach(c => document.getElementById(`form-${c}`).classList.remove('open'));
+  if (!isOpen) {
+    form.classList.add('open');
+    document.getElementById(`linput-${cat}`).focus();
+  }
+}
+
+function addLead(cat) {
+  if (!me) return;
+  const input = document.getElementById(`linput-${cat}`);
+  const name = input.value.trim();
+  if (!name) return;
+  if (!leads[cat]) leads[cat] = [];
+  leads[cat].push({id: 'lead-'+Date.now(), name, addedBy: me});
+  input.value = '';
+  document.getElementById(`form-${cat}`).classList.remove('open');
+  renderLeads();
+  updateTopStats();
+  broadcast('leads_update', {leads});
+}
+
+function renderLeads() {
+  document.getElementById('lp-setate').textContent = (leads.setate||[]).length;
+  document.getElementById('lp-oferta').textContent = (leads.oferta||[]).length;
+  document.getElementById('lp-inchise').textContent = (leads.inchise||[]).length;
 }
 
 // ===== CALLERS =====
@@ -755,7 +977,7 @@ function renderCallers() {
   container.innerHTML = '';
   CALLERS.forEach(id => {
     const m = MEMBERS[id];
-    const sc = scores[id] || {setate:0,sunate:0};
+    const sc = scores[id] || {setate:0,oferta:0,inchise:0};
     const isMe = me === id;
     const div = document.createElement('div');
     div.className = `caller-card ${isMe?'is-me':''}`;
@@ -765,12 +987,14 @@ function renderCallers() {
         ${isMe ? '<div class="you-badge">YOU</div>' : ''}
       </div>
       <div class="caller-scores">
-        <div class="score-chip gold">🎯 <span style="opacity:.6;font-size:8px">Setate</span><span class="sc-val">${sc.setate}</span></div>
-        <div class="score-chip sky">📞 <span style="opacity:.6;font-size:8px">Sunate</span><span class="sc-val">${sc.sunate}</span></div>
+        <div class="score-chip gold"><span class="sc-val">${sc.setate}</span><span class="sc-lbl">Setate</span></div>
+        <div class="score-chip sky"><span class="sc-val">${sc.oferta}</span><span class="sc-lbl">Oferte</span></div>
+        <div class="score-chip green"><span class="sc-val">${sc.inchise}</span><span class="sc-lbl">Închise</span></div>
       </div>
       ${isMe ? `<div class="caller-btns">
-        <button class="score-btn sunat" onclick="incScore('${id}','sunate')">+1 Sunat</button>
-        <button class="score-btn setat" onclick="incScore('${id}','setate')">+1 Setat</button>
+        <button class="score-btn btn-setate" onclick="incScore('${id}','setate')">+1 Setat</button>
+        <button class="score-btn btn-oferta" onclick="incScore('${id}','oferta')">+1 Ofertă</button>
+        <button class="score-btn btn-inchise" onclick="incScore('${id}','inchise')">+1 Închis</button>
       </div>` : ''}
     `;
     container.appendChild(div);
@@ -778,28 +1002,24 @@ function renderCallers() {
 }
 
 function incScore(id, field) {
-  if (!scores[id]) scores[id] = {setate:0,sunate:0};
+  if (!scores[id]) scores[id] = {setate:0,oferta:0,inchise:0};
   scores[id][field]++;
   renderCallers();
   updateTopStats();
-  broadcast('score', { memberId: id, field, value: scores[id][field] });
+  broadcast('score', { scores });
 }
 
 function updateTopStats() {
   const totalSetate = CALLERS.reduce((s,id) => s + (scores[id]?.setate||0), 0);
-  const totalSunate = CALLERS.reduce((s,id) => s + (scores[id]?.sunate||0), 0);
+  const totalOferta = CALLERS.reduce((s,id) => s + (scores[id]?.oferta||0), 0);
+  const totalInchise = CALLERS.reduce((s,id) => s + (scores[id]?.inchise||0), 0);
   document.getElementById('top-setate').textContent = totalSetate;
-  document.getElementById('top-sunate').textContent = totalSunate;
-  document.getElementById('lp-setate').textContent = totalSetate;
-  document.getElementById('lp-sunate').textContent = totalSunate;
+  document.getElementById('top-oferta').textContent = totalOferta;
+  document.getElementById('top-inchise').textContent = totalInchise;
   document.getElementById('goal-daily-txt').textContent = `${totalSetate}/10`;
-  document.getElementById('goal-monthly-txt').textContent = `${totalSetate}/50`;
+  document.getElementById('goal-monthly-txt').textContent = `${totalInchise}/50`;
   document.getElementById('goal-daily-bar').style.width = Math.min((totalSetate/10)*100,100)+'%';
-  document.getElementById('goal-monthly-bar').style.width = Math.min((totalSetate/50)*100,100)+'%';
-  const inP = cards.filter(c=>c.column==='inProgress').length;
-  const done = cards.filter(c=>c.column==='done').length;
-  document.getElementById('lp-inprogress').textContent = inP;
-  document.getElementById('lp-done').textContent = done;
+  document.getElementById('goal-monthly-bar').style.width = Math.min((totalInchise/50)*100,100)+'%';
 }
 
 // ===== PAYMENTS =====
@@ -879,17 +1099,89 @@ function toggleKanbanForm() {
 
 function addCard() {
   const title = document.getElementById('k-title').value.trim();
-  if (!title || !me) return;
+  if (!title) return;
   cards.push({
     id: 'k'+Date.now(),
     title,
     type: document.getElementById('k-type').value,
     priority: document.getElementById('k-priority').value,
-    column: 'todo'
+    column: 'todo',
+    assignee: document.getElementById('k-assignee').value || ''
   });
   document.getElementById('k-title').value = '';
   renderKanban();
   broadcast('cards_update', { cards });
+}
+
+function deleteCard(id) {
+  cards = cards.filter(c=>c.id!==id);
+  renderKanban();
+  broadcast('cards_update', {cards});
+}
+
+function addLibTask() {
+  const title = prompt('Titlu task în bibliotecă:');
+  if (!title || !title.trim()) return;
+  libTasks.unshift({id:'l'+Date.now(), title: title.trim(), type:'task', priority:'medium'});
+  renderLibrary();
+}
+
+function renderLibrary() {
+  const list = document.getElementById('task-lib-list');
+  list.innerHTML = libTasks.map(t => `
+    <div class="lib-task" draggable="true" data-id="${t.id}"
+      ondragstart="onLibDragStart(event,'${t.id}')" ondragend="onDragEnd(event)">
+      <div class="lib-task-title">${t.title}</div>
+      <div class="lib-task-tags">
+        <div class="card-tag ${t.type==='lead'?'tag-lead':'tag-task'}">${t.type==='lead'?'🎯':'📌'} ${t.type.toUpperCase()}</div>
+        <div class="card-tag tag-${t.priority}">${{high:'🔴',medium:'🟡',low:'🟢'}[t.priority]}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderMemberDropZones() {
+  const row = document.getElementById('member-drop-row');
+  row.innerHTML = Object.entries(MEMBERS).map(([id,m]) => {
+    const cnt = cards.filter(c=>c.assignee===id&&c.column!=='done').length;
+    return `<div class="member-drop-zone" data-member="${id}"
+      ondragover="onMemberZoneDragOver(event,'${id}')"
+      ondrop="onMemberZoneDrop(event,'${id}')"
+      ondragleave="onMemberZoneDragLeave(event)">
+      <span>${m.emoji}</span>
+      <span class="mdz-name">${m.name}</span>
+      ${cnt>0?`<span class="mdz-count">${cnt}</span>`:''}
+    </div>`;
+  }).join('');
+}
+
+function onMemberZoneDragOver(e, memberId) {
+  e.preventDefault();
+  e.stopPropagation();
+  const el = document.querySelector(`.member-drop-zone[data-member="${memberId}"]`);
+  if (el) el.classList.add('drag-over-member');
+}
+function onMemberZoneDragLeave(e) {
+  document.querySelectorAll('.member-drop-zone').forEach(el=>el.classList.remove('drag-over-member'));
+}
+function onMemberZoneDrop(e, memberId) {
+  e.preventDefault();
+  document.querySelectorAll('.member-drop-zone').forEach(el=>el.classList.remove('drag-over-member'));
+  if (!dragId) return;
+  if (dragSource === 'library') {
+    const lt = libTasks.find(t=>t.id===dragId);
+    if (lt) {
+      cards.push({id:'k'+Date.now(),title:lt.title,type:lt.type,priority:lt.priority,column:'todo',assignee:memberId});
+    }
+  } else if (dragSource === 'board') {
+    const card = cards.find(c=>c.id===dragId);
+    if (card) card.assignee = memberId;
+  }
+  renderKanban();
+  renderDesks();
+  broadcast('cards_update', {cards});
+  showToast(`📋 Task → ${MEMBERS[memberId].emoji} ${MEMBERS[memberId].name}`);
+  dragId = null; dragSource = null;
 }
 
 function renderKanban() {
@@ -898,24 +1190,46 @@ function renderKanban() {
     const safeId = col === 'inProgress' ? 'inprogress' : col;
     document.getElementById(`cnt-${safeId}`).textContent = colCards.length;
     const container = document.getElementById(`cards-${safeId}`);
-    container.innerHTML = colCards.map(c => `
+    container.innerHTML = colCards.map(c => {
+      const assigneeHtml = c.assignee && MEMBERS[c.assignee]
+        ? `<div class="card-assignee">${MEMBERS[c.assignee].emoji} ${MEMBERS[c.assignee].name}</div>`
+        : '';
+      return `
       <div class="kanban-card priority-${c.priority}" draggable="true" data-id="${c.id}"
         ondragstart="onDragStart(event,'${c.id}')" ondragend="onDragEnd(event)">
-        <div class="card-title">${c.title}</div>
+        <div class="card-title">
+          <button class="card-delete" onclick="event.stopPropagation();deleteCard('${c.id}')">✕</button>
+          ${c.title}
+        </div>
         <div class="card-tags">
           <div class="card-tag ${c.type==='lead'?'tag-lead':'tag-task'}">${c.type==='lead'?'🎯 LEAD':'📌 TASK'}</div>
           <div class="card-tag tag-${c.priority}">${{high:'🔴 High',medium:'🟡 Medium',low:'🟢 Low'}[c.priority]}</div>
         </div>
+        ${assigneeHtml}
       </div>
-    `).join('') + `<div class="drop-zone" id="dz-${safeId}">DROP HERE</div>`;
+    `}).join('') + `<div class="drop-zone" id="dz-${safeId}">TRAGE AICI</div>`;
   });
-  document.getElementById('kanban-count').textContent = cards.length + ' cards';
+  document.getElementById('kanban-count').textContent = cards.length + ' taskuri';
+  renderLibrary();
+  renderMemberDropZones();
   updateTopStats();
+  renderDesks();
 }
 
-// Drag & Drop
-function onDragStart(e, id) { dragId = id; e.target.classList.add('dragging'); }
-function onDragEnd(e) { e.target.classList.remove('dragging'); }
+// Drag & Drop — board cards
+function onDragStart(e, id) {
+  dragId = id;
+  dragSource = 'board';
+  e.target.classList.add('dragging');
+}
+function onLibDragStart(e, id) {
+  dragId = id;
+  dragSource = 'library';
+  e.target.classList.add('dragging');
+}
+function onDragEnd(e) {
+  e.target.classList.remove('dragging');
+}
 function onDragOver(e, col) {
   e.preventDefault();
   const safeId = col === 'inProgress' ? 'inprogress' : col;
@@ -929,9 +1243,27 @@ function onDrop(e, col) {
   e.preventDefault();
   document.querySelectorAll('.drop-zone').forEach(dz => dz.classList.remove('active'));
   if (!dragId) return;
-  const card = cards.find(c=>c.id===dragId);
-  if (card) { card.column = col; renderKanban(); broadcast('cards_update', { cards }); }
-  dragId = null;
+  if (dragSource === 'library') {
+    const lt = libTasks.find(t=>t.id===dragId);
+    if (lt) {
+      cards.push({id:'k'+Date.now(),title:lt.title,type:lt.type,priority:lt.priority,column:col,assignee:''});
+      renderKanban();
+      broadcast('cards_update', {cards});
+    }
+  } else if (dragSource === 'board') {
+    const card = cards.find(c=>c.id===dragId);
+    if (card) { card.column = col; renderKanban(); broadcast('cards_update', { cards }); }
+  }
+  dragId = null; dragSource = null;
+}
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
 }
 
 // ===== MOBILE PANEL =====
@@ -948,13 +1280,13 @@ function showMobilePanel(type) {
 function renderAll() {
   renderDesks();
   renderCallers();
+  renderLeads();
   renderPayments();
   renderKanban();
   updateTopStats();
   updateOnlineCount();
 }
 
-// Init render
 renderAll();
 </script>
 </body>
