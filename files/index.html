@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AgentieSEO — Virtual Office</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Sortable.js for Kanban drag & drop -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     TOP BAR
+══════════════════════════════════════════ -->
+<header class="top-bar">
+  <div class="top-bar__logo">
+    <span class="logo-bracket">[</span>
+    <span class="logo-text">AGENTIE<span class="logo-accent">SEO</span></span>
+    <span class="logo-bracket">]</span>
+  </div>
+  <div class="top-bar__scoreboard" id="scoreboard">
+    <span class="score-label">LEADS SETATE</span>
+    <span class="score-value" id="score-setate">0</span>
+    <span class="score-divider">|</span>
+    <span class="score-label">LEADS SUNATE</span>
+    <span class="score-value" id="score-sunate">0</span>
+  </div>
+  <div class="top-bar__status">
+    <span class="dot dot--green"></span>
+    <span id="online-count">0 online</span>
+    <span class="time" id="clock"></span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════
+     MEMBER LOGIN OVERLAY
+══════════════════════════════════════════ -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-card">
+    <div class="login-title">INTRĂ ÎN BIROU</div>
+    <p class="login-sub">Selectează-ți identitatea</p>
+    <div class="member-select-grid">
+      <button class="member-btn" data-id="lucian" data-name="Lucian">
+        <span class="member-btn__avatar">👑</span>
+        <span>Lucian</span>
+        <span class="member-btn__role">CEO</span>
+      </button>
+      <button class="member-btn" data-id="catalin" data-name="Cătălin">
+        <span class="member-btn__avatar">📞</span>
+        <span>Cătălin</span>
+        <span class="member-btn__role">Caller</span>
+      </button>
+      <button class="member-btn" data-id="saitama" data-name="Saitama">
+        <span class="member-btn__avatar">⚡</span>
+        <span>Saitama</span>
+        <span class="member-btn__role">Caller</span>
+      </button>
+      <button class="member-btn" data-id="beleaua" data-name="Beleaua">
+        <span class="member-btn__avatar">🔥</span>
+        <span>Beleaua</span>
+        <span class="member-btn__role">CST</span>
+      </button>
+      <button class="member-btn" data-id="liviu" data-name="Liviu">
+        <span class="member-btn__avatar">📸</span>
+        <span>Liviu</span>
+        <span class="member-btn__role">Multimedia</span>
+      </button>
+      <button class="member-btn" data-id="vlad" data-name="Vlad">
+        <span class="member-btn__avatar">💻</span>
+        <span>Vlad</span>
+        <span class="member-btn__role">Dev</span>
+      </button>
+      <button class="member-btn" data-id="cosmin" data-name="Cosmin">
+        <span class="member-btn__avatar">🌐</span>
+        <span>Cosmin</span>
+        <span class="member-btn__role">Web+SEO</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     MAIN LAYOUT
+══════════════════════════════════════════ -->
+<main class="office-layout">
+
+  <!-- LEFT: KANBAN BOARD -->
+  <aside class="panel panel--kanban" id="kanbanPanel">
+    <div class="panel__header">
+      <span class="panel__title">📋 TASK BOARD</span>
+      <button class="btn-add-card" id="btnAddCard">+ ADAUGĂ</button>
+    </div>
+
+    <!-- Add Card Form (hidden by default) -->
+    <div class="add-card-form" id="addCardForm" style="display:none">
+      <input type="text" class="form-input" id="cardTitle" placeholder="Titlu task / lead..."/>
+      <select class="form-select" id="cardType">
+        <option value="task">📌 Task</option>
+        <option value="lead">🎯 Lead</option>
+      </select>
+      <select class="form-select" id="cardPriority">
+        <option value="high">🔴 High</option>
+        <option value="medium">🟡 Medium</option>
+        <option value="low">🟢 Low</option>
+      </select>
+      <button class="btn-confirm" id="btnConfirmCard">✅ ADAUGĂ CARD</button>
+    </div>
+
+    <div class="kanban-board">
+      <div class="kanban-col">
+        <div class="kanban-col__header">TO DO</div>
+        <div class="kanban-cards" id="col-todo" data-col="todo"></div>
+      </div>
+      <div class="kanban-col">
+        <div class="kanban-col__header in-progress">IN PROGRESS</div>
+        <div class="kanban-cards" id="col-inProgress" data-col="inProgress"></div>
+      </div>
+      <div class="kanban-col">
+        <div class="kanban-col__header done">DONE ✓</div>
+        <div class="kanban-cards" id="col-done" data-col="done"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CENTER: THE HALL / HALA -->
+  <section class="hall" id="hall">
+
+    <!-- HALL BACKGROUND ELEMENTS -->
+    <div class="hall__bg">
+      <div class="hall__floor"></div>
+      <div class="hall__ceiling-lights">
+        <span class="light"></span><span class="light"></span>
+        <span class="light"></span><span class="light"></span>
+        <span class="light"></span>
+      </div>
+    </div>
+
+    <!-- CARS SHOWCASE -->
+    <div class="cars-showcase">
+      <div class="car-slot car-slot--ferrari">
+        <div class="car-body ferrari">
+          <div class="car-top"></div>
+          <div class="car-bottom">
+            <div class="wheel wheel-left"></div>
+            <div class="wheel wheel-right"></div>
+          </div>
+          <div class="car-stripe"></div>
+        </div>
+        <div class="car-label">FERRARI 488</div>
+        <div class="car-sublabel">GOAL: 50 LEADS/LUNĂ</div>
+      </div>
+      <div class="car-slot car-slot--mercedes">
+        <div class="car-body mercedes">
+          <div class="car-top"></div>
+          <div class="car-bottom">
+            <div class="wheel wheel-left"></div>
+            <div class="wheel wheel-right"></div>
+          </div>
+          <div class="car-grill"></div>
+        </div>
+        <div class="car-label">MERCEDES G63</div>
+        <div class="car-sublabel">GOAL: 100K RON/LUNĂ</div>
+      </div>
+    </div>
+
+    <!-- DESKS GRID -->
+    <div class="desks-grid">
+
+      <!-- LUCIAN - CEO CENTER -->
+      <div class="desk desk--ceo" id="desk-lucian">
+        <div class="desk__bubble" id="bubble-lucian"></div>
+        <div class="desk__avatar-wrap">
+          <div class="desk__avatar avatar--ceo" id="avatar-lucian">👑</div>
+          <div class="desk__status-dot" id="status-lucian"></div>
+        </div>
+        <div class="desk__screen">
+          <div class="desk__screen-content">
+            <div class="screen-line"></div>
+            <div class="screen-line short"></div>
+          </div>
+        </div>
+        <div class="desk__nameplate">
+          <span class="desk__name">Lucian</span>
+          <span class="desk__role">CEO · PR · Networking · Investiții</span>
+        </div>
+      </div>
+
+      <!-- CĂTĂLIN - CALLER -->
+      <div class="desk desk--caller" id="desk-catalin">
+        <div class="desk__bubble" id="bubble-catalin"></div>
+        <div class="desk__avatar-wrap">
+          <div class="desk__avatar" id="avatar-catalin">📞</div>
+          <div class="desk__status-dot" id="status-catalin"></div>
+        </div>
+        <div class="desk__headset">🎧</div>
+        <div class="desk__nameplate">
+          <span class="desk__name">Cătălin</span>
+          <span class="desk__role">Caller / Setter</span>
+        </div>
+      </div>
+
+      <!-- SAITAMA - CALLER -->
+      <div class="desk desk--caller" id="desk-saitama">
+        <div class="desk__bubble" id="bubble-saitama"></div>
+        <div class="desk__avatar-wrap">
+          <div class="desk__avatar" id="avatar-saitama">⚡</div>
+          <div class="desk__status-dot" id="status-saitama"></div>
+        </div>
+        <div class="desk__headset">🎧</div>
+        <div class="desk__nameplate">
+          <span class="desk__name">Saitama</span>
+          <span class="desk__role">Caller / Setter</span>
+        </div>
+      </div>
+
+      <!-- BELEAUA - CST / CALL SETTINGS -->
+      <div class="desk desk--caller" id="desk-beleaua">
+        <div class="desk__bubble" id="bubble-beleaua"></div>
+        <div class="desk__avatar-wrap">
+          <div class="desk__avatar" id="avatar-beleaua">🔥</div>
+          <div class="desk__status-dot" id="status-beleaua"></div>
+        </div>
+        <div class="desk__headset">🎧</div>
+        <div class="desk__nameplate">
+          <span class="desk__name">Beleaua</span>
+          <span class="desk__role">CST · Call Settings</span>
+        </div>
+      </div>
+
+      <!-- LIVIU - MULTIMEDIA -->
+      <div class="desk desk--multimedia" id="desk-liviu">
+        <div class="desk__bubble" id="bubble-liviu"></div>
+        <div class="liviu-flash-overlay" id="liviuFlash"></div>
+        <div class="desk__avatar-wrap">
+          <div class="desk__avatar" id="avatar-liviu">📸</div>
+          <div class="desk__status-dot" id="status-liviu"></div>
+        </div>
+        <!-- Whiteboard -->
+        <div class="whiteboard">
+          <div class="whiteboard__title">📋 TASKS</div>
+          <div class="whiteboard__lines">
+            <div class="wb-line"></div>
+            <div class="wb-line short"></div>
+            <div class="wb-line"></div>
+          </div>
+        </div>
+        <div class="desk__nameplate">
+          <span class="desk__name">Liviu</span>
+          <span class="desk__role">Multimedia · Photo · Video</span>
+        </div>
+      </div>
+
+      <!-- VLAD - CUSTOM CODE -->
+      <div class="desk desk--dev" id="desk-vlad">
+        <div class="desk__bubble" id="bubble-vlad"></div>
+        <div class="desk__avatar-wrap">
+          <div class="desk__avatar" id="avatar-vlad">💻</div>
+          <div class="desk__status-dot" id="status-vlad"></div>
+        </div>
+        <div class="desk__monitors">
+          <div class="monitor"><div class="monitor-code"></div></div>
+          <div class="monitor small"><div class="monitor-code"></div></div>
+        </div>
+        <div class="desk__nameplate">
+          <span class="desk__name">Vlad</span>
+          <span class="desk__role">Custom Code · Restaurante · Meniuri · Apps</span>
+        </div>
+      </div>
+
+      <!-- COSMIN - WEB + SEO -->
+      <div class="desk desk--seo" id="desk-cosmin">
+        <div class="desk__bubble" id="bubble-cosmin"></div>
+        <div class="desk__avatar-wrap">
+          <div class="desk__avatar" id="avatar-cosmin">🌐</div>
+          <div class="desk__status-dot" id="status-cosmin"></div>
+        </div>
+        <div class="desk__nameplate">
+          <span class="desk__name">Cosmin</span>
+          <span class="desk__role">Web Dev · SEO · Part-Time</span>
+        </div>
+        <div class="part-time-badge">PART-TIME</div>
+      </div>
+
+    </div><!-- /desks-grid -->
+
+    <!-- CHAT BAR (bottom of hall) -->
+    <div class="chat-bar" id="chatBar">
+      <div class="chat-bar__inner">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Scrie un mesaj sau emoji... 🔥" maxlength="80"/>
+        <button class="chat-send" id="chatSend">SEND ↵</button>
+      </div>
+      <div class="emoji-quick">
+        <button class="emoji-btn" data-emoji="🔥">🔥</button>
+        <button class="emoji-btn" data-emoji="✅">✅</button>
+        <button class="emoji-btn" data-emoji="👀">👀</button>
+        <button class="emoji-btn" data-emoji="💪">💪</button>
+        <button class="emoji-btn" data-emoji="🎯">🎯</button>
+        <button class="emoji-btn" data-emoji="⚡">⚡</button>
+      </div>
+    </div>
+
+  </section><!-- /hall -->
+
+  <!-- RIGHT: PAYMENTS PANEL -->
+  <aside class="panel panel--payments" id="paymentsPanel">
+    <div class="panel__header">
+      <span class="panel__title">💰 ÎNCASĂRI</span>
+      <button class="btn-add-payment" id="btnAddPayment">+</button>
+    </div>
+
+    <!-- Add Payment Form -->
+    <div class="add-payment-form" id="addPaymentForm" style="display:none">
+      <input type="text" class="form-input" id="payClient" placeholder="Nume client"/>
+      <input type="number" class="form-input" id="payAmount" placeholder="Sumă (RON)"/>
+      <input type="date" class="form-input" id="payDue"/>
+      <button class="btn-confirm" id="btnConfirmPayment">✅ ADAUGĂ</button>
+    </div>
+
+    <div class="payments-list" id="paymentsList"></div>
+
+    <div class="payments-total">
+      <span class="total-label">TOTAL ESTIMAT</span>
+      <span class="total-value" id="paymentsTotal">0 RON</span>
+    </div>
+  </aside>
+
+</main>
+
+<!-- ══════════════════════════════════════════
+     CALLER SCORE CONTROLS (callers only)
+══════════════════════════════════════════ -->
+<div class="caller-controls" id="callerControls" style="display:none">
+  <button class="score-ctrl-btn" data-field="leadsSunate">📞 +1 SUNAT</button>
+  <button class="score-ctrl-btn" data-field="leadsSetate">🎯 +1 SETAT</button>
+</div>
+
+<!-- Liviu Flash Button -->
+<div class="liviu-controls" id="liviuControls" style="display:none">
+  <button class="liviu-trigger-btn" id="liviuTrigger">📸 ACTIVITATE</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
